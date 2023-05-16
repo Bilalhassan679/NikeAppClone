@@ -11,3 +11,7 @@ npx expo install @react-navigation/native @react-navigation/native-stack react-n
 
 //For REDUX TOOLKIT
 npm install @reduxjs/toolkit react-redux
+
+use This toast for using yarn add command
+https://github.com/arnnis/react-native-toast-notifications
+=>yarn add react-native-toast-notifications
