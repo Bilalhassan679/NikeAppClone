@@ -15,3 +15,4 @@ npm install @reduxjs/toolkit react-redux
 use This toast for using yarn add command
 https://github.com/arnnis/react-native-toast-notifications
 =>yarn add react-native-toast-notifications
+in this project we have folder for toast Readme file you can seee folder in project directory
