@@ -6,6 +6,7 @@ import {
   useWindowDimensions,
   Text,
   Pressable,
+  Alert,
 } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native";
@@ -19,7 +20,7 @@ const ProductDetailsScreen = () => {
   const { width } = useWindowDimensions();
 
   const onCart = () => {
-    console.warn("onCart");
+    Alert.alert("On Cart");
     dispatch(cartSlice.actions.addCartItem({ products }));
   };
   return (
