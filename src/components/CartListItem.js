@@ -6,35 +6,55 @@ import {
   View,
 } from "react-native";
 import React, { useCallback, useState } from "react";
-import Carts from "../data/cart";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
+import cartSlice from "../store/cartSlice";
 const CartListItem = ({ cartItem }) => {
-  const [quantity, setQuantity] = useState(1);
+  const products = useSelector((state) => state?.products.setSelectedProducts);
+  const dispatch = useDispatch();
   const addQuantity = useCallback(() => {
-    setQuantity((prev) => prev + 1);
-  }, [quantity]);
+    dispatch(
+      cartSlice.actions.changeQuantity({
+        productsId: cartItem?.products?.id,
+        add: 1,
+      })
+    );
+    // setQuantity((prev) => prev + 1);
+    // dispatch(cartSlice.actions.addCartItem({ products }));
+  }, [cartItem?.quantity]);
   const subQuantity = useCallback(() => {
-    setQuantity((prev) => prev - 1);
-  }, [quantity]);
+    dispatch(
+      cartSlice.actions.changeQuantity({
+        productsId: cartItem?.products?.id,
+        add: -1,
+      })
+    );
+    // setQuantity((prev) => prev - 1);
+    // dispatch(cartSlice.actions.addCartItem({ products }));
+  }, [cartItem]);
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: cartItem?.product.image }} />
+      <Image style={styles.image} source={{ uri: cartItem?.products?.image }} />
       <View style={styles.midContainer}>
         <View>
-          <Text style={styles.title}>{cartItem?.product.name}</Text>
-          <Text style={styles.description}>size : {cartItem?.size}</Text>
+          <Text style={styles.title}>{cartItem?.products?.name}</Text>
+          <Text style={styles.description}>
+            size : {cartItem.products?.sizes[0]}
+          </Text>
         </View>
         <View style={styles.cartBtn}>
           <TouchableHighlight onPress={subQuantity}>
             <AntDesign name="minuscircleo" size={20} color="black" />
           </TouchableHighlight>
-          <Text style={{ ...styles.priceText, padding: 5 }}>{quantity}</Text>
+          <Text style={{ ...styles.priceText, padding: 5 }}>
+            {cartItem?.quantity}
+          </Text>
           <TouchableHighlight onPress={addQuantity}>
             <AntDesign name="pluscircleo" size={20} color="black" />
           </TouchableHighlight>
           <View style={styles.price}>
             <Text style={styles.priceText}>
-              {quantity * cartItem?.product.price}
+              {cartItem?.quantity * cartItem?.products?.price}
             </Text>
           </View>
         </View>

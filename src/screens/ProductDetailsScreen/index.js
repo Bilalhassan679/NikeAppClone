@@ -8,15 +8,19 @@ import {
   Pressable,
 } from "react-native";
 import React from "react";
-import Products from "../data/products";
 import { ScrollView } from "react-native";
-
+import { useSelector, useDispatch } from "react-redux";
+import cartSlice from "../../store/cartSlice";
 const ProductDetailsScreen = () => {
+  const products = useSelector((state) => state?.products.setSelectedProducts);
+  const dispatch = useDispatch();
+
+  console.log("products", products);
   const { width } = useWindowDimensions();
-  const products = Products[0];
 
   const onCart = () => {
-    console.log("Add to Cart");
+    console.warn("onCart");
+    dispatch(cartSlice.actions.addCartItem({ products }));
   };
   return (
     <>
@@ -91,6 +95,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "center",
     borderRadius: 50,
+    alignSelf: "center",
   },
   textCart: {
     color: "white",

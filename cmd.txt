@@ -1,0 +1,13 @@
+//For Creating Project
+npx create-expo-app NikeApp
+
+//For Start
+npm start
+//For clear Cache 
+npm start -c
+
+//For Navigation
+npx expo install @react-navigation/native @react-navigation/native-stack react-native-screens react-native-safe-area-context
+
+//For REDUX TOOLKIT
+npm install @reduxjs/toolkit react-redux

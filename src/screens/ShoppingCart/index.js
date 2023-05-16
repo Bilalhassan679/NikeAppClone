@@ -2,25 +2,35 @@ import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useCallback } from "react";
 import Carts from "../../data/cart";
 import CartListItem from "../../components/CartListItem";
+import { useSelector } from "react-redux";
+import {
+  subItemsTotal,
+  selectDeliveryPrice,
+  totalPrice,
+} from "../../store/cartSlice";
 
 const ShoppingCart = () => {
+  const cartItems = useSelector((state) => state.cart.items);
   const onCart = () => {
     console.log("Checkout");
   };
   const ShoppingCartFooter = useCallback(() => {
+    const subTotal = useSelector(subItemsTotal);
+    const deliveryPrice = useSelector(selectDeliveryPrice);
+    const totalPriceNumber = useSelector(totalPrice);
     return (
       <View style={styles.footorContainer}>
         <View style={styles.innerFooter}>
           <Text style={styles.subText}>SubTotal</Text>
-          <Text style={styles.subText}>4100 US$</Text>
+          <Text style={styles.subText}>{subTotal} US$</Text>
         </View>
         <View style={styles.innerFooter}>
           <Text style={styles.subText}>Delivery</Text>
-          <Text style={styles.subText}>100 US$</Text>
+          <Text style={styles.subText}>{deliveryPrice} US$</Text>
         </View>
         <View style={styles.innerFooter}>
           <Text style={styles.TotalText}>Total</Text>
-          <Text style={styles.TotalText}>42,00 US$</Text>
+          <Text style={styles.TotalText}>{totalPriceNumber} US$</Text>
         </View>
       </View>
     );
@@ -30,9 +40,9 @@ const ShoppingCart = () => {
       <View>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={Carts}
+          data={cartItems}
           renderItem={({ item }) => <CartListItem cartItem={item} />}
-          ListFooterComponent={ShoppingCartFooter}
+          ListFooterComponent={cartItems.length && ShoppingCartFooter}
         />
       </View>
       <Pressable onPress={onCart} style={styles.addtocart}>
