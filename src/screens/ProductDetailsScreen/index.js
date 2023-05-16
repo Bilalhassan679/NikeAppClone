@@ -12,7 +12,11 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import cartSlice from "../../store/cartSlice";
+import { useToast } from "react-native-toast-notifications";
 const ProductDetailsScreen = () => {
+  // Expo Toast
+  const toast = useToast();
+
   const products = useSelector((state) => state?.products.setSelectedProducts);
   const dispatch = useDispatch();
 
@@ -20,7 +24,10 @@ const ProductDetailsScreen = () => {
   const { width } = useWindowDimensions();
 
   const onCart = () => {
-    Alert.alert("On Cart");
+    toast.show("Successfully Cart", {
+      type: "danger",
+      duration: 2000,
+    });
     dispatch(cartSlice.actions.addCartItem({ products }));
   };
   return (

@@ -4,14 +4,17 @@ import { StyleSheet, View } from "react-native";
 import Navigation from "./src/Navigation/navigation";
 import { Provider } from "react-redux";
 import store from "./src/store";
+import { ToastProvider } from "react-native-toast-notifications";
 
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Navigation />
-        <StatusBar style="auto" />
-      </View>
+      <ToastProvider>
+        <View style={styles.container}>
+          <Navigation />
+          <StatusBar style="auto" />
+        </View>
+      </ToastProvider>
     </Provider>
   );
 }

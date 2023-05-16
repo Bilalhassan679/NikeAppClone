@@ -1,5 +1,5 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import Carts from "../../data/cart";
 import CartListItem from "../../components/CartListItem";
 import { useSelector } from "react-redux";
@@ -35,6 +35,7 @@ const ShoppingCart = () => {
       </View>
     );
   }, []);
+
   return (
     <>
       <View>
